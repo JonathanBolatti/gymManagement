@@ -1,7 +1,10 @@
 # Dockerfile para Railway - Gym Management System
 
 # Stage 1: Build
-FROM maven:3.9-openjdk-17-slim AS build
+FROM amazoncorretto:17-alpine AS build
+
+# Instalar Maven
+RUN apk add --no-cache maven
 
 # Crear directorio de trabajo
 WORKDIR /app
@@ -22,13 +25,13 @@ COPY src ./src
 RUN mvn clean package -DskipTests -B
 
 # Stage 2: Runtime
-FROM eclipse-temurin:17-jre
+FROM amazoncorretto:17-alpine
 
 # Instalar curl para health checks
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache curl
 
 # Crear usuario no-root para seguridad
-RUN addgroup --system spring && adduser --system spring --ingroup spring
+RUN addgroup -S spring && adduser -S spring -G spring
 
 # Crear directorio de la aplicación
 WORKDIR /app
@@ -37,7 +40,7 @@ WORKDIR /app
 RUN chown spring:spring /app
 
 # Cambiar al usuario no-root
-USER spring:spring
+USER spring
 
 # Copiar el JAR desde el stage de build
 COPY --from=build --chown=spring:spring /app/target/*.jar app.jar
