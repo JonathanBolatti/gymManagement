@@ -1,0 +1,9 @@
+com.gym_management.system
+com.gym_management.system.controller
+com.gym_management.system.exception
+com.gym_management.system.model
+com.gym_management.system.model.dto
+com.gym_management.system.repository
+com.gym_management.system.security
+com.gym_management.system.services
+com.gym_management.system.services.impl

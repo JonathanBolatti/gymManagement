@@ -1,0 +1,13 @@
+/Users/jonathanbolatti/Proyecto Kendell/Back-End/system/src/main/java/com/gym_management/system/SystemApplication.java
+/Users/jonathanbolatti/Proyecto Kendell/Back-End/system/src/main/java/com/gym_management/system/controller/MemberController.java
+/Users/jonathanbolatti/Proyecto Kendell/Back-End/system/src/main/java/com/gym_management/system/exception/DuplicateEmailException.java
+/Users/jonathanbolatti/Proyecto Kendell/Back-End/system/src/main/java/com/gym_management/system/exception/GlobalExceptionHandler.java
+/Users/jonathanbolatti/Proyecto Kendell/Back-End/system/src/main/java/com/gym_management/system/exception/MemberNotFoundException.java
+/Users/jonathanbolatti/Proyecto Kendell/Back-End/system/src/main/java/com/gym_management/system/model/Member.java
+/Users/jonathanbolatti/Proyecto Kendell/Back-End/system/src/main/java/com/gym_management/system/model/dto/CreateMemberRequest.java
+/Users/jonathanbolatti/Proyecto Kendell/Back-End/system/src/main/java/com/gym_management/system/model/dto/MemberResponse.java
+/Users/jonathanbolatti/Proyecto Kendell/Back-End/system/src/main/java/com/gym_management/system/model/dto/UpdateMemberRequest.java
+/Users/jonathanbolatti/Proyecto Kendell/Back-End/system/src/main/java/com/gym_management/system/repository/MemberRepository.java
+/Users/jonathanbolatti/Proyecto Kendell/Back-End/system/src/main/java/com/gym_management/system/security/SecurityConfig.java
+/Users/jonathanbolatti/Proyecto Kendell/Back-End/system/src/main/java/com/gym_management/system/services/MemberService.java
+/Users/jonathanbolatti/Proyecto Kendell/Back-End/system/src/main/java/com/gym_management/system/services/impl/MemberServiceImpl.java

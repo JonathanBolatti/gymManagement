@@ -1,0 +1,15 @@
+# EC2 Configuration for gym-management-dev
+# Generated on Fri Jul 25 00:42:27 -03 2025
+
+INSTANCE_ID=i-01dfc058281b0eff9
+PUBLIC_IP=35.153.177.255
+PRIVATE_IP=10.0.1.132
+KEY_PAIR_NAME=gym-management-dev-keypair
+AMI_ID=ami-083e865b97bdf1c1b
+INSTANCE_TYPE=t3.micro
+IAM_ROLE_NAME=gym-management-dev-ec2-role
+IAM_INSTANCE_PROFILE_NAME=gym-management-dev-ec2-profile
+
+# Comandos útiles
+# SSH: ssh -i gym-management-dev-keypair.pem ec2-user@35.153.177.255
+# SCP: scp -i gym-management-dev-keypair.pem archivo.jar ec2-user@35.153.177.255:/tmp/

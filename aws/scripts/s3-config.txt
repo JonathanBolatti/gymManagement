@@ -1,0 +1,12 @@
+# S3 Configuration for gym-management-dev
+# Generated on Fri Jul 25 00:40:10 -03 2025
+
+S3_BUCKET_NAME=gym-management-dev-bucket-1753414783
+S3_LOGS_BUCKET_NAME=gym-management-dev-logs-1753414783
+S3_REGION=us-east-1
+IAM_POLICY_NAME=gym-management-dev-s3-policy
+
+# Variables de entorno para la aplicación
+export S3_BUCKET_NAME=gym-management-dev-bucket-1753414783
+export AWS_REGION=us-east-1
+export S3_URL_EXPIRATION=3600

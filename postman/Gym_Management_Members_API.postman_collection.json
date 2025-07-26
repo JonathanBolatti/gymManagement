@@ -1,0 +1,367 @@
+{
+	"info": {
+		"_postman_id": "gym-management-members-api",
+		"name": "🏋️ Gym Management - Members API",
+		"description": "Colección completa de endpoints para la gestión de miembros del gimnasio.\n\n**Base URL:** http://localhost:8080\n\n**Funcionalidades incluidas:**\n- ✅ CRUD completo de miembros\n- ✅ Búsqueda y filtrado\n- ✅ Estadísticas\n- ✅ Health check\n\n**Creado para:** Sistema de Gestión de Gimnasio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "👥 Members CRUD",
+			"item": [
+				{
+					"name": "➕ Crear Miembro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Juan Carlos\",\n  \"lastName\": \"Pérez González\",\n  \"email\": \"juan.perez@email.com\",\n  \"phone\": \"+56987654321\",\n  \"birthDate\": \"1990-05-15\",\n  \"gender\": \"M\",\n  \"height\": 1.75,\n  \"weight\": 75.5,\n  \"emergencyContact\": \"María Pérez\",\n  \"emergencyPhone\": \"+56987654322\",\n  \"observations\": \"Interesado en entrenamiento funcional\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"members"
+							]
+						},
+						"description": "Crear un nuevo miembro en el gimnasio.\n\n**Campos obligatorios:**\n- firstName, lastName, email, phone, birthDate, gender\n\n**Campos opcionales:**\n- height, weight, emergencyContact, emergencyPhone, observations"
+					},
+					"response": []
+				},
+				{
+					"name": "📋 Obtener Todos los Miembros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/members?page=0&size=10&sortBy=firstName&sortDirection=asc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"members"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "Número de página (inicia en 0)"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"description": "Cantidad de elementos por página"
+								},
+								{
+									"key": "sortBy",
+									"value": "firstName",
+									"description": "Campo para ordenar (firstName, lastName, email, createdAt)"
+								},
+								{
+									"key": "sortDirection",
+									"value": "asc",
+									"description": "Dirección del ordenamiento (asc, desc)"
+								}
+							]
+						},
+						"description": "Obtener lista paginada de todos los miembros.\n\n**Parámetros de consulta:**\n- **page:** Número de página (default: 0)\n- **size:** Elementos por página (default: 10)\n- **sortBy:** Campo de ordenamiento (default: firstName)\n- **sortDirection:** asc o desc (default: asc)"
+					},
+					"response": []
+				},
+				{
+					"name": "👤 Obtener Miembro por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/members/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"members",
+								"1"
+							]
+						},
+						"description": "Obtener información detallada de un miembro específico por su ID.\n\n**Parámetros:**\n- **id:** ID único del miembro"
+					},
+					"response": []
+				},
+				{
+					"name": "✏️ Actualizar Miembro",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Juan Carlos\",\n  \"lastName\": \"Pérez González\",\n  \"email\": \"juan.perez.updated@email.com\",\n  \"phone\": \"+56987654321\",\n  \"birthDate\": \"1990-05-15\",\n  \"gender\": \"M\",\n  \"height\": 1.76,\n  \"weight\": 76.0,\n  \"emergencyContact\": \"María Pérez\",\n  \"emergencyPhone\": \"+56987654322\",\n  \"isActive\": true,\n  \"observations\": \"Actualizado - Entrenamiento funcional avanzado\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/members/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"members",
+								"1"
+							]
+						},
+						"description": "Actualizar información de un miembro existente.\n\n**Nota:** Solo se actualizan los campos enviados (actualización parcial).\n\n**Parámetros:**\n- **id:** ID del miembro a actualizar"
+					},
+					"response": []
+				},
+				{
+					"name": "🗑️ Eliminar Miembro (Borrado Lógico)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/members/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"members",
+								"1"
+							]
+						},
+						"description": "Eliminar un miembro (borrado lógico).\n\nEsto desactiva al miembro (isActive = false) en lugar de eliminarlo físicamente de la base de datos.\n\n**Parámetros:**\n- **id:** ID del miembro a eliminar"
+					},
+					"response": []
+				}
+			],
+			"description": "Operaciones CRUD básicas para la gestión de miembros",
+			"event": []
+		},
+		{
+			"name": "🔍 Búsqueda y Filtros",
+			"item": [
+				{
+					"name": "📧 Buscar Miembro por Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/members/email/juan.perez@email.com",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"members",
+								"email",
+								"juan.perez@email.com"
+							]
+						},
+						"description": "Buscar un miembro específico por su dirección de email.\n\n**Parámetros:**\n- **email:** Dirección de email del miembro"
+					},
+					"response": []
+				},
+				{
+					"name": "👥 Buscar Miembros por Nombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/members/search?name=Juan",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"members",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Juan",
+									"description": "Término de búsqueda (busca en firstName y lastName)"
+								}
+							]
+						},
+						"description": "Buscar miembros por nombre o apellido.\n\nLa búsqueda es **case-insensitive** y busca coincidencias parciales en firstName y lastName.\n\n**Parámetros:**\n- **name:** Término de búsqueda"
+					},
+					"response": []
+				},
+				{
+					"name": "✅ Obtener Miembros Activos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/members/active",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"members",
+								"active"
+							]
+						},
+						"description": "Obtener lista de todos los miembros activos (isActive = true).\n\nÚtil para obtener solo los miembros que están actualmente activos en el gimnasio."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints para búsqueda y filtrado de miembros",
+			"event": []
+		},
+		{
+			"name": "📊 Estadísticas y Monitoreo",
+			"item": [
+				{
+					"name": "📈 Estadísticas de Miembros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/members/stats",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"members",
+								"stats"
+							]
+						},
+						"description": "Obtener estadísticas generales de miembros.\n\n**Información incluida:**\n- Total de miembros\n- Miembros activos\n- Miembros inactivos\n\nÚtil para dashboards y reportes."
+					},
+					"response": []
+				},
+				{
+					"name": "💚 Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/members/health",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"members",
+								"health"
+							]
+						},
+						"description": "Verificar que el servicio de miembros está funcionando correctamente.\n\nRetorna un mensaje simple confirmando que la API está activa."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints para estadísticas y monitoreo del sistema",
+			"event": []
+		},
+		{
+			"name": "🗄️ Base de Datos y Sistema",
+			"item": [
+				{
+					"name": "🔍 H2 Console",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/h2-console",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"h2-console"
+							]
+						},
+						"description": "Acceder a la consola H2 para inspección directa de la base de datos.\n\n**Credenciales:**\n- **JDBC URL:** jdbc:h2:mem:gymdb\n- **Usuario:** root\n- **Contraseña:** root\n\n**Nota:** Solo disponible en perfil de desarrollo"
+					},
+					"response": []
+				},
+				{
+					"name": "⚡ Actuator Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/actuator/health",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actuator",
+								"health"
+							]
+						},
+						"description": "Verificar el estado general de la aplicación.\n\nMonitorea:\n- Estado de la base de datos\n- Espacio en disco\n- Estado general de la aplicación"
+					},
+					"response": []
+				},
+				{
+					"name": "📊 Actuator Metrics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/actuator/metrics",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"actuator",
+								"metrics"
+							]
+						},
+						"description": "Obtener lista de métricas disponibles del sistema.\n\nIncluye métricas de:\n- JVM\n- Base de datos\n- HTTP requests\n- Memoria y CPU"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints para acceso a herramientas del sistema y base de datos",
+			"event": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+} 

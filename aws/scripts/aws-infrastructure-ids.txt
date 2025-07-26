@@ -1,0 +1,39 @@
+# AWS Infrastructure IDs for gym-management-dev
+# Generated on Fri Jul 25 00:21:08 -03 2025
+
+VPC_ID=vpc-029b5ebeecbf5eb59
+IGW_ID=igw-0b4807c98649df49f
+PUBLIC_SUBNET_1_ID=subnet-09377a21182a224a9
+PUBLIC_SUBNET_2_ID=subnet-0435b8fcd8ea63561
+PRIVATE_SUBNET_1_ID=subnet-0b9baec1721899678
+PRIVATE_SUBNET_2_ID=subnet-0f5a1e33b52761c1f
+PUBLIC_ROUTE_TABLE_ID=rtb-09741cd57fa78bab8
+APP_SG_ID=sg-07796e0d4705ecf3f
+DB_SG_ID=sg-0b6e33af474eab8fe
+AWS_REGION=us-east-1
+ENVIRONMENT=dev
+
+# Database Configuration
+DB_INSTANCE_IDENTIFIER=gym-management-dev-db
+RDS_ENDPOINT=gym-management-dev-db.ca9qcqg66h2q.us-east-1.rds.amazonaws.com
+RDS_DB_NAME=gym_management
+RDS_USERNAME=gymuser
+DB_SG_ID=sg-0b6e33af474eab8fe 
+
+# S3 Configuration
+S3_BUCKET_NAME=gym-management-dev-bucket-1753414783
+S3_LOGS_BUCKET_NAME=gym-management-dev-logs-1753414783
+IAM_POLICY_NAME=gym-management-dev-s3-policy
+
+# EC2 Configuration
+INSTANCE_ID=i-01dfc058281b0eff9
+PUBLIC_IP=35.153.177.255
+KEY_PAIR_NAME=gym-management-dev-keypair
+IAM_ROLE_NAME=gym-management-dev-ec2-role
+IAM_INSTANCE_PROFILE_NAME=gym-management-dev-ec2-profile 
+
+# CloudWatch Configuration
+CLOUDWATCH_NAMESPACE=gym-management-dev
+LOG_GROUP_NAME=/aws/ec2/gym-management-dev
+DASHBOARD_NAME=gym-management-dev-dashboard
+EOF 

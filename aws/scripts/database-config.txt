@@ -1,0 +1,17 @@
+# Database Configuration for gym-management-dev
+# Generated on Fri Jul 25 00:30:30 -03 2025
+
+DB_INSTANCE_IDENTIFIER=gym-management-dev-db
+RDS_ENDPOINT=gym-management-dev-db.ca9qcqg66h2q.us-east-1.rds.amazonaws.com
+RDS_DB_NAME=gym_management
+RDS_USERNAME=gymuser
+RDS_PASSWORD=gympass123!
+DB_SG_ID=sg-0b6e33af474eab8fe
+DB_SUBNET_GROUP_NAME=gym-management-dev-db-subnet-group
+DB_PARAMETER_GROUP_NAME=gym-management-dev-mysql80
+
+# Variables de entorno para la aplicación
+export RDS_ENDPOINT=gym-management-dev-db.ca9qcqg66h2q.us-east-1.rds.amazonaws.com
+export RDS_DB_NAME=gym_management
+export RDS_USERNAME=gymuser
+export RDS_PASSWORD=gympass123!
