@@ -1,19 +1,13 @@
 # Dockerfile para Railway - Gym Management System
 
 # Stage 1: Build
-FROM amazoncorretto:17-alpine AS build
-
-# Instalar Maven
-RUN apk add --no-cache maven
+FROM maven:3.9-amazoncorretto-17 AS build
 
 # Crear directorio de trabajo
 WORKDIR /app
 
-# Copiar archivos de configuración de Maven
+# Copiar solo pom.xml primero para mejor cache de dependencias
 COPY pom.xml .
-COPY mvnw .
-COPY mvnw.cmd .
-COPY .mvn .mvn
 
 # Descargar dependencias (cache layer)
 RUN mvn dependency:go-offline -B
@@ -24,7 +18,7 @@ COPY src ./src
 # Construir la aplicación (saltando tests para optimizar build time)
 RUN mvn clean package -DskipTests -B
 
-# Stage 2: Runtime
+# Stage 2: Runtime  
 FROM amazoncorretto:17-alpine
 
 # Instalar curl para health checks
