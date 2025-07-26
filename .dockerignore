@@ -1,0 +1,58 @@
+# Ignorar archivos de build
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Ignorar archivos IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# Ignorar archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos de git
+.git/
+.gitignore
+
+# Ignorar archivos de configuración local
+*.log
+*.tmp
+*.temp
+
+# Ignorar documentación generada
+docs/generated/
+target/apidocs/
+
+# Ignorar archivos de backup
+*.bak
+*.backup
+*~
+
+# Ignorar archivos de Node.js (si los hay)
+node_modules/
+npm-debug.log*
+
+# Ignorar archivos de Maven wrapper (se copian explícitamente)
+!mvnw
+!mvnw.cmd
+!.mvn/
+
+# Ignorar README y documentación (no necesarios en producción)
+README.md
+HELP.md
+*.md
+
+# Ignorar postman collections
+postman/
+
+# Ignorar scripts
+scripts/ 
