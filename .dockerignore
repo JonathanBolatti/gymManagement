@@ -55,4 +55,9 @@ HELP.md
 postman/
 
 # Ignorar scripts
-scripts/ 
+scripts/
+
+# Ignorar archivos de Docker Compose (solo para desarrollo local)
+docker-compose.yml
+docker/
+README-Docker.md 

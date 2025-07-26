@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  # Base de datos MySQL para desarrollo local
+  mysql-dev:
+    image: mysql:8.0
+    container_name: gym-mysql-dev
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: gym_management
+      MYSQL_USER: gymuser
+      MYSQL_PASSWORD: gympass
+      MYSQL_ROOT_PASSWORD: rootpass
+    ports:
+      - "3306:3306"
+    volumes:
+      # Persistir datos entre reinicios
+      - mysql_data:/var/lib/mysql
+      # Configuración personalizada de MySQL
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    networks:
+      - gym-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpass"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # PhpMyAdmin para gestión visual de la BD (opcional)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: gym-phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql-dev
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: rootpass
+    ports:
+      - "8081:80"
+    depends_on:
+      mysql-dev:
+        condition: service_healthy
+    networks:
+      - gym-network
+
+# Volúmenes para persistir datos
+volumes:
+  mysql_data:
+    driver: local
+
+# Red para comunicación entre servicios
+networks:
+  gym-network:
+    driver: bridge 
