@@ -7,7 +7,7 @@ Este archivo te permite levantar una base de datos MySQL localmente para desarro
 ### 1. Levantar la Base de Datos
 
 ```bash
-# Levantar MySQL + PhpMyAdmin en background
+# Levantar MySQL
 docker-compose up -d
 
 # Ver logs en tiempo real
@@ -44,10 +44,6 @@ mvn spring-boot:run -Dspring-boot.run.profiles=dev
 - **Password**: gympass
 - **Root Password**: rootpass
 
-### **PhpMyAdmin** (Interfaz Web)
-- **URL**: http://localhost:8081
-- **Usuario**: root
-- **Password**: rootpass
 
 ## 📋 Comandos Útiles
 
@@ -145,9 +141,6 @@ docker-compose logs -f
 # Solo MySQL
 docker-compose logs -f mysql-dev
 
-# Solo PhpMyAdmin
-docker-compose logs -f phpmyadmin
-```
 
 ### **Performance**
 ```bash
