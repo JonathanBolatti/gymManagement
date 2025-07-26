@@ -1,7 +1,7 @@
 # Dockerfile para Railway - Gym Management System
 
 # Stage 1: Build
-FROM maven:3.9.5-openjdk-17 AS build
+FROM maven:3.9-openjdk-17-slim AS build
 
 # Crear directorio de trabajo
 WORKDIR /app
@@ -22,7 +22,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests -B
 
 # Stage 2: Runtime
-FROM openjdk:17-jre-slim
+FROM eclipse-temurin:17-jre
 
 # Instalar curl para health checks
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
