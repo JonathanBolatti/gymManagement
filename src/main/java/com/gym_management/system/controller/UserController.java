@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "*") // Configurar según necesidades de CORS
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {

@@ -33,6 +33,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
 
+        log.debug("JWT Filter - Processing request: {} {}", request.getMethod(), request.getRequestURI());
+        
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String username;
@@ -98,10 +100,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
         
         // No filtrar endpoints públicos
-        return path.startsWith("/api/auth/") ||
+        boolean shouldNotFilter = path.startsWith("/api/auth/") ||
                path.startsWith("/actuator/") ||
                path.startsWith("/h2-console/") ||
                path.equals("/api/members/health") ||
                path.equals("/api/members/stats");
+        
+        log.debug("JWT Filter - Path: {}, Should not filter: {}", path, shouldNotFilter);
+        
+        return shouldNotFilter;
     }
 } 
