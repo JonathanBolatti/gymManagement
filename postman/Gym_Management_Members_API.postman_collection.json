@@ -1,13 +1,239 @@
 {
 	"info": {
-		"_postman_id": "gym-management-members-api",
-		"name": "🏋️ Gym Management - Members API",
-		"description": "Colección completa de endpoints para la gestión de miembros del gimnasio.\n\n**Base URL:** http://localhost:8080\n\n**Funcionalidades incluidas:**\n- ✅ CRUD completo de miembros\n- ✅ Búsqueda y filtrado\n- ✅ Estadísticas\n- ✅ Health check\n\n**Creado para:** Sistema de Gestión de Gimnasio",
+		"_postman_id": "gym-management-api",
+		"name": "🏋️ Gym Management - Complete API with JWT",
+		"description": "Colección completa de endpoints para el sistema de gestión de gimnasio con autenticación JWT.\n\n**Base URL:** http://localhost:8080\n\n**Funcionalidades incluidas:**\n- 🔐 **Autenticación JWT** (Login, Register, Refresh, Validate)\n- ✅ CRUD completo de miembros (clientes)\n- ✅ CRUD completo de usuarios (empleados/administradores)\n- ✅ Búsqueda y filtrado\n- ✅ Gestión de roles (ADMIN, MANAGER, RECEPTIONIST)\n- ✅ Estadísticas y monitoreo\n- ✅ Health check\n\n**Entidades:**\n- **Auth:** Autenticación y autorización JWT\n- **Members:** Clientes del gimnasio\n- **Users:** Empleados y administradores del sistema\n\n**Creado para:** Sistema de Gestión de Gimnasio - Backend",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "👥 Members CRUD",
+			"name": "🔐 Auth JWT (Autenticación)",
+			"item": [
+				{
+					"name": "🏥 Health Check Auth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/health",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"health"
+							]
+						},
+						"description": "Verificar que el servicio de autenticación esté funcionando correctamente."
+					},
+					"response": []
+				},
+				{
+					"name": "🔑 Login (JSON)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Autenticar usuario y obtener token JWT. Usa JSON en el body."
+					},
+					"response": []
+				},
+				{
+					"name": "🔑 Login (Form Data)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login-form",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login-form"
+							]
+						},
+						"description": "Login usando form-data para compatibilidad y testing."
+					},
+					"response": []
+				},
+				{
+					"name": "📝 Register (Crear Usuario)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"newuser\",\n  \"email\": \"newuser@gym.com\",\n  \"password\": \"password123\",\n  \"firstName\": \"Nuevo\",\n  \"lastName\": \"Usuario\",\n  \"phone\": \"+56987654321\",\n  \"role\": \"RECEPTIONIST\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Registrar un nuevo usuario en el sistema y obtener token JWT."
+					},
+					"response": []
+				},
+				{
+					"name": "🔄 Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\"YOUR_REFRESH_TOKEN_HERE\""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/refresh",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"refresh"
+							]
+						},
+						"description": "Renovar el access token usando el refresh token."
+					},
+					"response": []
+				},
+				{
+					"name": "✅ Validate Token (JSON)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\"YOUR_JWT_TOKEN_HERE\""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/validate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"validate"
+							]
+						},
+						"description": "Validar si un token JWT es válido. Usa JSON en el body."
+					},
+					"response": []
+				},
+				{
+					"name": "✅ Validate Token (Form Data)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "YOUR_JWT_TOKEN_HERE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/validate-form",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"validate-form"
+							]
+						},
+						"description": "Validar token usando form-data para compatibilidad."
+					},
+					"response": []
+				},
+				{
+					"name": "🔐 Encrypt Passwords",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/encrypt-passwords",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"encrypt-passwords"
+							]
+						},
+						"description": "Encriptar contraseñas existentes en la base de datos (solo para migración)."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "👥 Members CRUD (Clientes)",
 			"item": [
 				{
 					"name": "➕ Crear Miembro",
@@ -148,11 +374,366 @@
 					"response": []
 				}
 			],
-			"description": "Operaciones CRUD básicas para la gestión de miembros",
+			"description": "Operaciones CRUD básicas para la gestión de miembros (clientes del gimnasio)",
 			"event": []
 		},
 		{
-			"name": "🔍 Búsqueda y Filtros",
+			"name": "👨‍💼 Users CRUD (Empleados/Administradores)",
+			"item": [
+				{
+					"name": "➕ Crear Usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"test.user\",\n  \"email\": \"test.user@gym.com\",\n  \"password\": \"password123\",\n  \"firstName\": \"Test\",\n  \"lastName\": \"User\",\n  \"phone\": \"+56999999999\",\n  \"role\": \"RECEPTIONIST\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Crear un nuevo usuario del sistema (empleado/administrador).\n\n**Campos obligatorios:**\n- username, email, password, firstName, lastName, role\n\n**Roles disponibles:**\n- `ADMIN`: Administrador del sistema\n- `MANAGER`: Manager/Gerente\n- `RECEPTIONIST`: Recepcionista\n\n**Campos opcionales:**\n- phone"
+					},
+					"response": []
+				},
+				{
+					"name": "📋 Obtener Todos los Usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Obtener lista de todos los usuarios del sistema.\n\nIncluye tanto usuarios activos como inactivos."
+					},
+					"response": []
+				},
+				{
+					"name": "✅ Obtener Usuarios Activos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/active",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"active"
+							]
+						},
+						"description": "Obtener lista de usuarios activos únicamente.\n\nÚtil para obtener solo los empleados que están actualmente trabajando."
+					},
+					"response": []
+				},
+				{
+					"name": "👤 Obtener Usuario por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						},
+						"description": "Obtener información detallada de un usuario específico por su ID.\n\n**Parámetros:**\n- **id:** ID único del usuario"
+					},
+					"response": []
+				},
+				{
+					"name": "🔑 Obtener Usuario por Username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/username/admin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"username",
+								"admin"
+							]
+						},
+						"description": "Buscar un usuario específico por su username.\n\n**Parámetros:**\n- **username:** Username único del usuario"
+					},
+					"response": []
+				},
+				{
+					"name": "📧 Obtener Usuario por Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/email/admin@gym.com",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"email",
+								"admin@gym.com"
+							]
+						},
+						"description": "Buscar un usuario específico por su email.\n\n**Parámetros:**\n- **email:** Email único del usuario"
+					},
+					"response": []
+				},
+				{
+					"name": "✏️ Actualizar Usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Nombre Actualizado\",\n  \"lastName\": \"Apellido Actualizado\",\n  \"phone\": \"+56888888888\",\n  \"role\": \"MANAGER\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						},
+						"description": "Actualizar información de un usuario existente.\n\n**Nota:** Solo se actualizan los campos enviados (actualización parcial).\n\n**Campos actualizables:**\n- username, email, password, firstName, lastName, phone, role, isActive\n\n**Parámetros:**\n- **id:** ID del usuario a actualizar"
+					},
+					"response": []
+				},
+				{
+					"name": "🚫 Desactivar Usuario",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/1/deactivate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1",
+								"deactivate"
+							]
+						},
+						"description": "Desactivar un usuario del sistema.\n\nEsto cambia el estado a `isActive = false` sin eliminar el usuario.\n\n**Parámetros:**\n- **id:** ID del usuario a desactivar"
+					},
+					"response": []
+				},
+				{
+					"name": "✅ Activar Usuario",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/1/activate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1",
+								"activate"
+							]
+						},
+						"description": "Activar un usuario del sistema.\n\nEsto cambia el estado a `isActive = true`.\n\n**Parámetros:**\n- **id:** ID del usuario a activar"
+					},
+					"response": []
+				},
+				{
+					"name": "🗑️ Eliminar Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						},
+						"description": "Eliminar completamente un usuario del sistema.\n\n**⚠️ CUIDADO:** Esta es una eliminación física permanente.\n\n**Parámetros:**\n- **id:** ID del usuario a eliminar"
+					},
+					"response": []
+				}
+			],
+			"description": "Operaciones CRUD para la gestión de usuarios del sistema (empleados y administradores)",
+			"event": []
+		},
+		{
+			"name": "🔍 Users - Búsqueda y Filtros",
+			"item": [
+				{
+					"name": "🎭 Obtener Usuarios por Rol",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/role/ADMIN",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"role",
+								"ADMIN"
+							]
+						},
+						"description": "Obtener todos los usuarios con un rol específico.\n\n**Roles disponibles:**\n- `ADMIN`: Administradores\n- `MANAGER`: Managers/Gerentes\n- `RECEPTIONIST`: Recepcionistas\n\n**Parámetros:**\n- **role:** Rol a filtrar (ADMIN, MANAGER, RECEPTIONIST)"
+					},
+					"response": []
+				},
+				{
+					"name": "🎭✅ Obtener Usuarios Activos por Rol",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/role/MANAGER/active",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"role",
+								"MANAGER",
+								"active"
+							]
+						},
+						"description": "Obtener usuarios activos con un rol específico.\n\nCombina filtros por rol y estado activo.\n\n**Parámetros:**\n- **role:** Rol a filtrar (ADMIN, MANAGER, RECEPTIONIST)"
+					},
+					"response": []
+				},
+				{
+					"name": "🔍 Buscar Usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/search?q=admin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "admin",
+									"description": "Término de búsqueda"
+								}
+							]
+						},
+						"description": "Buscar usuarios por múltiples campos.\n\nLa búsqueda es **case-insensitive** y busca coincidencias parciales en:\n- firstName\n- lastName\n- username\n- email\n\n**Parámetros:**\n- **q:** Término de búsqueda"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints para búsqueda y filtrado de usuarios del sistema",
+			"event": []
+		},
+		{
+			"name": "✅ Users - Validaciones",
+			"item": [
+				{
+					"name": "🔍 Verificar Username Existe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/exists/username/admin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"exists",
+								"username",
+								"admin"
+							]
+						},
+						"description": "Verificar si un username ya está en uso.\n\nRetorna `true` si existe, `false` si está disponible.\n\nÚtil para validaciones en tiempo real en formularios.\n\n**Parámetros:**\n- **username:** Username a verificar"
+					},
+					"response": []
+				},
+				{
+					"name": "📧 Verificar Email Existe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/exists/email/admin@gym.com",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"exists",
+								"email",
+								"admin@gym.com"
+							]
+						},
+						"description": "Verificar si un email ya está en uso.\n\nRetorna `true` si existe, `false` si está disponible.\n\nÚtil para validaciones en tiempo real en formularios.\n\n**Parámetros:**\n- **email:** Email a verificar"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints para validaciones de usuarios (verificar duplicados)",
+			"event": []
+		},
+		{
+			"name": "🔍 Members - Búsqueda y Filtros",
 			"item": [
 				{
 					"name": "📧 Buscar Miembro por Email",
@@ -223,11 +804,11 @@
 					"response": []
 				}
 			],
-			"description": "Endpoints para búsqueda y filtrado de miembros",
+			"description": "Endpoints para búsqueda y filtrado de miembros (clientes)",
 			"event": []
 		},
 		{
-			"name": "📊 Estadísticas y Monitoreo",
+			"name": "📊 Members - Estadísticas y Monitoreo",
 			"item": [
 				{
 					"name": "📈 Estadísticas de Miembros",
@@ -270,7 +851,7 @@
 					"response": []
 				}
 			],
-			"description": "Endpoints para estadísticas y monitoreo del sistema",
+			"description": "Endpoints para estadísticas y monitoreo de miembros",
 			"event": []
 		},
 		{

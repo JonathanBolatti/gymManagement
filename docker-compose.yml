@@ -8,8 +8,8 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: gym_management
-      MYSQL_USER: gymuser
-      MYSQL_PASSWORD: gympass
+      MYSQL_USER: devuser
+      MYSQL_PASSWORD: devpass
       MYSQL_ROOT_PASSWORD: rootpass
     ports:
       - "3306:3306"
