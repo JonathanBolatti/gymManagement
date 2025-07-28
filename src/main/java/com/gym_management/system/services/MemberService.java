@@ -69,8 +69,14 @@ public interface MemberService {
      * request.setLastName("García");
      * request.setEmail("ana.garcia@email.com");
      * request.setPhone("+56987654321");
-     * request.setBirthDate(LocalDate.of(1990, 5, 15));
-     * request.setGender("F");
+     * request.setDateOfBirth("1990-05-15");
+     * request.setGender("FEMALE");
+     * request.setAddress("Av. Providencia 1234");
+     * request.setEmergencyContact("Carlos García");
+     * request.setEmergencyPhone("+56912345678");
+     * request.setMembershipType("BASIC");
+     * request.setStartDate("2024-01-01");
+     * request.setEndDate("2024-12-31");
      * 
      * MemberResponse newMember = memberService.createMember(request);
      * System.out.println("Miembro creado con ID: " + newMember.getId());
