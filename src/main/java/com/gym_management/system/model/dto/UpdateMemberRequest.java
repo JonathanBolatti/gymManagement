@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,12 +22,31 @@ public class UpdateMemberRequest {
     @Pattern(regexp = "^\\+?[1-9]\\d{1,14}$", message = "El formato del teléfono no es válido")
     private String phone;
     
-    @Past(message = "La fecha de nacimiento debe ser en el pasado")
-    private LocalDate birthDate;
+    private String dateOfBirth;
     
-    @Pattern(regexp = "^(M|F|O)$", message = "El género debe ser M (Masculino), F (Femenino) o O (Otro)")
+    @Pattern(regexp = "^(MALE|FEMALE|OTHER)$", message = "El género debe ser MALE, FEMALE u OTHER")
     private String gender;
     
+    @Size(max = 200, message = "La dirección no debe exceder 200 caracteres")
+    private String address;
+    
+    @Size(max = 100, message = "El contacto de emergencia no debe exceder 100 caracteres")
+    private String emergencyContact;
+    
+    @Pattern(regexp = "^\\+?[1-9]\\d{1,14}$", message = "El formato del teléfono de emergencia no es válido")
+    private String emergencyPhone;
+    
+    @Pattern(regexp = "^(BASIC|PREMIUM|VIP)$", message = "El tipo de membresía debe ser BASIC, PREMIUM o VIP")
+    private String membershipType;
+    
+    private String startDate;
+    
+    private String endDate;
+    
+    @Size(max = 500, message = "Las notas no deben exceder 500 caracteres")
+    private String notes;
+    
+    // Campos opcionales para información física
     @DecimalMin(value = "0.5", message = "La altura debe ser mayor a 0.5 metros")
     @DecimalMax(value = "3.0", message = "La altura debe ser menor a 3.0 metros")
     private Double height;
@@ -38,14 +55,5 @@ public class UpdateMemberRequest {
     @DecimalMax(value = "500.0", message = "El peso debe ser menor a 500 kg")
     private Double weight;
     
-    @Size(max = 100, message = "El contacto de emergencia no debe exceder 100 caracteres")
-    private String emergencyContact;
-    
-    @Pattern(regexp = "^\\+?[1-9]\\d{1,14}$", message = "El formato del teléfono de emergencia no es válido")
-    private String emergencyPhone;
-    
     private Boolean isActive;
-    
-    @Size(max = 500, message = "Las observaciones no deben exceder 500 caracteres")
-    private String observations;
 } 

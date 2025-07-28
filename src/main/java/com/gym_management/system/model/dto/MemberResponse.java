@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -67,20 +66,17 @@ public class MemberResponse {
     /** Número de teléfono del miembro */
     private String phone;
     
-    /** Fecha de nacimiento del miembro */
-    private LocalDate birthDate;
+    /** Fecha de nacimiento del miembro (formato string) */
+    private String dateOfBirth;
     
     /** Edad calculada basada en la fecha de nacimiento */
     private Integer age;
     
-    /** Género del miembro (M=Masculino, F=Femenino, O=Otro) */
+    /** Género del miembro (MALE, FEMALE, OTHER) */
     private String gender;
     
-    /** Altura del miembro en metros */
-    private Double height;
-    
-    /** Peso del miembro en kilogramos */
-    private Double weight;
+    /** Dirección del miembro */
+    private String address;
     
     /** Nombre del contacto de emergencia */
     private String emergencyContact;
@@ -88,11 +84,26 @@ public class MemberResponse {
     /** Teléfono del contacto de emergencia */
     private String emergencyPhone;
     
+    /** Tipo de membresía (BASIC, PREMIUM, VIP) */
+    private String membershipType;
+    
+    /** Fecha de inicio de la membresía */
+    private String startDate;
+    
+    /** Fecha de fin de la membresía */
+    private String endDate;
+    
+    /** Notas adicionales sobre el miembro */
+    private String notes;
+    
+    /** Altura del miembro en metros */
+    private Double height;
+    
+    /** Peso del miembro en kilogramos */
+    private Double weight;
+    
     /** Indica si el miembro está activo (true) o inactivo/eliminado (false) */
     private Boolean isActive;
-    
-    /** Observaciones adicionales sobre el miembro */
-    private String observations;
     
     /** Timestamp de creación del registro */
     private LocalDateTime createdAt;

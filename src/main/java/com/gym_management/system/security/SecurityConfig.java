@@ -36,6 +36,9 @@ public class SecurityConfig {
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/api/members/health").permitAll()
                 .requestMatchers("/api/members/stats").permitAll()
+                // Endpoints de miembros y usuarios - permitir a usuarios autenticados
+                .requestMatchers("/api/members/**").authenticated()
+                .requestMatchers("/api/users/**").authenticated()
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session

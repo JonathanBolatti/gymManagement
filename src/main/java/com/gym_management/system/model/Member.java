@@ -42,16 +42,48 @@ public class Member {
     @Column(name = "phone", nullable = false, length = 20)
     private String phone;
     
-    @NotNull(message = "La fecha de nacimiento es obligatoria")
-    @Past(message = "La fecha de nacimiento debe ser en el pasado")
-    @Column(name = "birth_date", nullable = false)
-    private LocalDate birthDate;
+    @NotBlank(message = "La fecha de nacimiento es obligatoria")
+    @Column(name = "date_of_birth", nullable = false)
+    private String dateOfBirth;
     
     @NotBlank(message = "El género es obligatorio")
-    @Pattern(regexp = "^(M|F|O)$", message = "El género debe ser M (Masculino), F (Femenino) o O (Otro)")
-    @Column(name = "gender", nullable = false, length = 1)
+    @Pattern(regexp = "^(MALE|FEMALE|OTHER)$", message = "El género debe ser MALE, FEMALE u OTHER")
+    @Column(name = "gender", nullable = false, length = 10)
     private String gender;
     
+    @NotBlank(message = "La dirección es obligatoria")
+    @Size(max = 200, message = "La dirección no debe exceder 200 caracteres")
+    @Column(name = "address", nullable = false, length = 200)
+    private String address;
+    
+    @NotBlank(message = "El contacto de emergencia es obligatorio")
+    @Size(max = 100, message = "El contacto de emergencia no debe exceder 100 caracteres")
+    @Column(name = "emergency_contact", nullable = false, length = 100)
+    private String emergencyContact;
+    
+    @NotBlank(message = "El teléfono de emergencia es obligatorio")
+    @Pattern(regexp = "^\\+?[1-9]\\d{1,14}$", message = "El formato del teléfono de emergencia no es válido")
+    @Column(name = "emergency_phone", nullable = false, length = 20)
+    private String emergencyPhone;
+    
+    @NotBlank(message = "El tipo de membresía es obligatorio")
+    @Pattern(regexp = "^(BASIC|PREMIUM|VIP)$", message = "El tipo de membresía debe ser BASIC, PREMIUM o VIP")
+    @Column(name = "membership_type", nullable = false, length = 20)
+    private String membershipType;
+    
+    @NotBlank(message = "La fecha de inicio es obligatoria")
+    @Column(name = "start_date", nullable = false)
+    private String startDate;
+    
+    @NotBlank(message = "La fecha de fin es obligatoria")
+    @Column(name = "end_date", nullable = false)
+    private String endDate;
+    
+    @Size(max = 500, message = "Las notas no deben exceder 500 caracteres")
+    @Column(name = "notes", length = 500)
+    private String notes;
+    
+    // Campos opcionales para información física
     @DecimalMin(value = "0.5", message = "La altura debe ser mayor a 0.5 metros")
     @DecimalMax(value = "3.0", message = "La altura debe ser menor a 3.0 metros")
     @Column(name = "height")
@@ -62,20 +94,8 @@ public class Member {
     @Column(name = "weight")
     private Double weight;
     
-    @Size(max = 100, message = "El contacto de emergencia no debe exceder 100 caracteres")
-    @Column(name = "emergency_contact", length = 100)
-    private String emergencyContact;
-    
-    @Pattern(regexp = "^\\+?[1-9]\\d{1,14}$", message = "El formato del teléfono de emergencia no es válido")
-    @Column(name = "emergency_phone", length = 20)
-    private String emergencyPhone;
-    
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
-    
-    @Size(max = 500, message = "Las observaciones no deben exceder 500 caracteres")
-    @Column(name = "observations", length = 500)
-    private String observations;
     
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -90,8 +110,13 @@ public class Member {
         return firstName + " " + lastName;
     }
     
-    // Método helper para calcular la edad
+    // Método helper para calcular la edad (convertir string a LocalDate)
     public int getAge() {
-        return LocalDate.now().getYear() - birthDate.getYear();
+        try {
+            LocalDate birthDate = LocalDate.parse(dateOfBirth);
+            return LocalDate.now().getYear() - birthDate.getYear();
+        } catch (Exception e) {
+            return 0; // Si no se puede parsear, retornar 0
+        }
     }
 } 

@@ -33,14 +33,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
 
-        log.debug("JWT Filter - Processing request: {} {}", request.getMethod(), request.getRequestURI());
-        
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String username;
 
         // Verificar si el header Authorization existe y comienza con "Bearer "
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            log.warn("JWT Filter - No Authorization header or invalid format for: {} {}", request.getMethod(), request.getRequestURI());
             filterChain.doFilter(request, response);
             return;
         }
@@ -76,7 +75,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     // Establecer autenticación en el contexto de seguridad
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                     
-                    log.debug("Usuario autenticado via JWT: {}", username);
+                    log.debug("Usuario autenticado via JWT: {} con authorities: {}", username, userDetails.getAuthorities());
                 } else {
                     log.warn("Token JWT inválido para usuario: {}", username);
                 }

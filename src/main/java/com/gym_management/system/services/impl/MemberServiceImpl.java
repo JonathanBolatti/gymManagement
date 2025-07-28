@@ -169,13 +169,17 @@ public class MemberServiceImpl implements MemberService {
         member.setLastName(request.getLastName());
         member.setEmail(request.getEmail());
         member.setPhone(request.getPhone());
-        member.setBirthDate(request.getBirthDate());
+        member.setDateOfBirth(request.getDateOfBirth());
         member.setGender(request.getGender());
-        member.setHeight(request.getHeight());
-        member.setWeight(request.getWeight());
+        member.setAddress(request.getAddress());
         member.setEmergencyContact(request.getEmergencyContact());
         member.setEmergencyPhone(request.getEmergencyPhone());
-        member.setObservations(request.getObservations());
+        member.setMembershipType(request.getMembershipType());
+        member.setStartDate(request.getStartDate());
+        member.setEndDate(request.getEndDate());
+        member.setNotes(request.getNotes());
+        member.setHeight(request.getHeight());
+        member.setWeight(request.getWeight());
         member.setIsActive(true); // Por defecto activo
         return member;
     }
@@ -194,15 +198,19 @@ public class MemberServiceImpl implements MemberService {
         response.setFullName(member.getFullName());
         response.setEmail(member.getEmail());
         response.setPhone(member.getPhone());
-        response.setBirthDate(member.getBirthDate());
+        response.setDateOfBirth(member.getDateOfBirth());
         response.setAge(member.getAge());
         response.setGender(member.getGender());
-        response.setHeight(member.getHeight());
-        response.setWeight(member.getWeight());
+        response.setAddress(member.getAddress());
         response.setEmergencyContact(member.getEmergencyContact());
         response.setEmergencyPhone(member.getEmergencyPhone());
+        response.setMembershipType(member.getMembershipType());
+        response.setStartDate(member.getStartDate());
+        response.setEndDate(member.getEndDate());
+        response.setNotes(member.getNotes());
+        response.setHeight(member.getHeight());
+        response.setWeight(member.getWeight());
         response.setIsActive(member.getIsActive());
-        response.setObservations(member.getObservations());
         response.setCreatedAt(member.getCreatedAt());
         response.setUpdatedAt(member.getUpdatedAt());
         return response;
@@ -227,17 +235,14 @@ public class MemberServiceImpl implements MemberService {
         if (request.getPhone() != null) {
             member.setPhone(request.getPhone());
         }
-        if (request.getBirthDate() != null) {
-            member.setBirthDate(request.getBirthDate());
+        if (request.getDateOfBirth() != null) {
+            member.setDateOfBirth(request.getDateOfBirth());
         }
         if (request.getGender() != null) {
             member.setGender(request.getGender());
         }
-        if (request.getHeight() != null) {
-            member.setHeight(request.getHeight());
-        }
-        if (request.getWeight() != null) {
-            member.setWeight(request.getWeight());
+        if (request.getAddress() != null) {
+            member.setAddress(request.getAddress());
         }
         if (request.getEmergencyContact() != null) {
             member.setEmergencyContact(request.getEmergencyContact());
@@ -245,11 +250,26 @@ public class MemberServiceImpl implements MemberService {
         if (request.getEmergencyPhone() != null) {
             member.setEmergencyPhone(request.getEmergencyPhone());
         }
+        if (request.getMembershipType() != null) {
+            member.setMembershipType(request.getMembershipType());
+        }
+        if (request.getStartDate() != null) {
+            member.setStartDate(request.getStartDate());
+        }
+        if (request.getEndDate() != null) {
+            member.setEndDate(request.getEndDate());
+        }
+        if (request.getNotes() != null) {
+            member.setNotes(request.getNotes());
+        }
+        if (request.getHeight() != null) {
+            member.setHeight(request.getHeight());
+        }
+        if (request.getWeight() != null) {
+            member.setWeight(request.getWeight());
+        }
         if (request.getIsActive() != null) {
             member.setIsActive(request.getIsActive());
-        }
-        if (request.getObservations() != null) {
-            member.setObservations(request.getObservations());
         }
     }
 } 
